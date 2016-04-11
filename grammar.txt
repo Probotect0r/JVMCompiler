@@ -1,0 +1,35 @@
+prog : block;
+
+block
+    : stmt+
+    ;
+
+stmt
+    : printStmt
+    | assignStmt
+    | repeatStmt
+    ;
+
+printStmt
+    : 'print' '(' exprList ')'
+    ;
+
+exprList
+    : (expr ',')* expr
+
+assignStmt
+    : 'let' ID "=" expr
+    ;
+
+repeatStmt
+    : 'repeat' expr '{' block '}'
+    ;
+
+expr returns [int val]
+    : ID
+    | expr * expr
+    | expr / expr
+    | expr + expr
+    | expr - expr
+    | '(' expr ')'
+    ;
