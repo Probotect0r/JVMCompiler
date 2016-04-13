@@ -60,11 +60,16 @@ assignStmt returns [Code code]
 
 printStmt returns [Code code]
     @init { $code = new Code(); }
-    : 'print' '(' exprList {
-                      $code.append(I.GetPrintStream());
-                      $code.extend($exprList.code);
-                      $code.append(I.invokePrintln());
-                      } ')'
+    : 'print' '(' ((e1=expr {
+                         $code.append(I.GetPrintStream());
+                         $code.extend($e1.code);
+                         $code.append(I.invokePrintln());
+                         }) ',')*
+                    e2=expr {
+                         $code.append(I.GetPrintStream());
+                         $code.extend($e2.code);
+                         $code.append(I.invokePrintln());
+                         } ')'
     ;
 
 repeatStmt returns [Code code]
@@ -86,7 +91,7 @@ repeatStmt returns [Code code]
                     .append(I.ILOAD(countreg))
                     .append(I.ISUB())
                     .append(I.IFZERO(end))
-                    .append(I.IINC(countreg, 1))
+                    .append(I.INC(countreg, 1))
                     .extend($block.code)
                     .append(I.GOTO(start))
                     .append(I.Label(end));

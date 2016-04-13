@@ -1,5 +1,5 @@
-ANTLR = ./lib/antlr-4.5.2-complete.jar
-JASMIN = ./lib/jasmin.jar
+ANTLR = lib/antlr-4.5.2-complete.jar
+JASMIN = lib/jasmin.jar
 CP = -cp .:$(ANTLR)
 
 all : g4 classes test

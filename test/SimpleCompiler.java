@@ -111,7 +111,7 @@ class I {
         return "idiv";
     }
 
-    public static String IINC(int r, int v) {
+    public static String INC(int r, int v) {
       return "iinc " + r + " " + v;
     }
 
