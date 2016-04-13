@@ -1,7 +1,7 @@
 import java.util.*;
 import org.antlr.v4.runtime.*;
 
-class Main {
+class SimpleCompiler {
     public static void main(String[] args) throws Exception {
         ANTLRInputStream input = new ANTLRInputStream(System.in);
         SimpleLexer lexer = new SimpleLexer(input);

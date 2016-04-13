@@ -60,11 +60,13 @@ assignStmt returns [Code code]
 
 printStmt returns [Code code]
     @init { $code = new Code(); }
-    : 'print' '(' exprList {
-                      $code.append(I.GetPrintStream());
-                      $code.extend($exprList.code);
-                      $code.append(I.invokePrintln());
-                      } ')'
+    : 'print' '(' (exprList {
+                              $code.append(I.GetPrintStream());
+                              $code.extend($exprList.code);
+                              $code.append(I.invokePrintln());
+
+
+                              }) ')'
     ;
 
 repeatStmt returns [Code code]
