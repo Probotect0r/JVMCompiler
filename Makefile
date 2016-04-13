@@ -1,19 +1,15 @@
-ANTLR = lib/antlr-4.5.2-complete.jar
-JASMIN = lib/jasmin.jar
-CP = -cp .:$(ANTLR)
+ANTLR = ./lib/antlr-4.5.2-complete.jar
+JASMIN = ./lib/jasmin.jar
+CP = $(ANTLR):$(JASMIN):.
 
-all : g4 classes test
+all:
+	java -jar $(ANTLR) -no-listener -no-visitor *.g4
+	javac -cp $(CP) *.java
 
-g4:
-	java -jar $(ANTLR) -no-visitor -no-listener *.g4
-
-classes:
-	javac $(CP) *.java
-
-test:
-	java $(CP) Main < sample.src > sample.j
+run:
+	java -cp $(CP) Main < sample.src > sample.j
 	java -jar $(JASMIN) sample.j
-	java MyApp
+	java -cp . MyApp
 
 clean:
 	rm -f Simple*.java *.tokens *.class *.j
